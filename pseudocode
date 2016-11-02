@@ -59,7 +59,15 @@ Function setMode()
 Function pickDirection()
 	Determine available directions;
 	Randomly pick a direction;
-
+Function checkCenter()
+	if mouse in middle:
+		searching = !searching;
+		returning = !returning;
+Function searchAlgorithm()
+	1...;
+	2...;
+	checkCenter();
+	
 // race mode functions
 
 	
@@ -70,19 +78,19 @@ setMode();
 while (searching)
 	Move 1 unit in direction
 	...
-	Check if mouse in middle
-		searching = false;
-		returning = true;
+	searchAlgorithm();
 
+	checkCenter();
+	
 //returning mode
 while (returning)
-	Return to start
+	Return to start;
 	
 //racing mode
 while (racing)
-	//pick 
+	pick fastest route with another algorithm;
 	race to the middle;
-
+	checkCenter();
 
 
 
