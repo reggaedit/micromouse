@@ -1,0 +1,89 @@
+
+
+MicroMouse Code Ideas
+
+// Sensory inputs
+- Three inputs:
+	-Left
+	-Front
+	-Right
+	
+// User inputs
+- Buttons
+	-Searching mode
+	-Racing mode
+	
+// Motor outputs
+- Four Wheels
+	-Front left
+	-Front right
+	-Rear left
+	-Rear right
+- Two turning wheels
+	-Left
+	-Right
+
+// Audio output?
+
+// LED output?
+
+
+//Maze algorithm - unknown maze - Trémaux's algorithm
+//	-It requires drawing lines on the floor to mark a path.
+//	-It's guaranteed to work for all mazes that have well-defined passages.
+//A path is either
+//	-unvisited
+//	-marked once or
+//	-marked twice.
+//Every time a direction is chosen it is marked by drawing a line on the floor (from junction to junction).
+
+/* Step-by-Step
+1. In the beginning a random direction is chosen (if there is more than one).
+2. On arriving at a junction that has not been visited before (no other marks), pick a random direction that is not marked (and mark the path).
+3. When arriving at a marked junction and if your current path is marked only once then turn around and walk back (and mark the path a second time).
+4. If this is not the case, pick the direction with the fewest marks (and mark it, as always).
+5. When you finally reach the solution, paths marked exactly once will indicate a direct way back to the start.
+6. If there is no exit, this method will take you back to the start where all paths are marked twice. In this case each path is walked down exactly twice, once in each direction.
+7. The resulting walk is called a bidirectional double-tracing.
+*/
+
+//Pseudocode
+
+//Mouse modes:
+boolean searching, returning, racing = false;
+
+Function setMode()
+	User input to get the mode
+
+// search mode functions
+Function pickDirection()
+	Determine available directions;
+	Randomly pick a direction;
+
+// race mode functions
+
+	
+// pick the mode
+setMode();
+
+// searching mode
+while (searching)
+	Move 1 unit in direction
+	...
+	Check if mouse in middle
+		searching = false;
+		returning = true;
+
+//returning mode
+while (returning)
+	Return to start
+	
+//racing mode
+while (racing)
+	//pick 
+	race to the middle;
+
+
+
+
+
