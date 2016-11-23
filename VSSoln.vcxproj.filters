@@ -18,8 +18,8 @@
     <ClCompile Include="testing\maze.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test folder\test22.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" />
   </ItemGroup>
 </Project>

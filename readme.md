@@ -11,3 +11,6 @@ This folder contains all the code for the micromouse maze solver. The mouse must
 	- [ ] Get a motored vehicle to run using an mbed
 	- [ ] Write pseudo code out in full
 	- [ ] Create a working model of a mouse that moves and processes sensory input
+
+## Build instructions
+	- In Visual Studio - open solution and Build project.
