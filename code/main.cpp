@@ -4,56 +4,25 @@
 #include <iostream>
 #include "Maze.h"
 #include "Cell.h"
+#include "Mouse.h"
 #include <stdint.h>
 #include <ctime>
 
-/*
+
+static uint8_t mouseXCoord = 0;
+static uint8_t mouseYCoord = 15;
+
+
 PwmOut ledPWM(p21);
 AnalogIn phototransistor(p15);
-
-PwmOut led1(LED1);
-PwmOut led2(LED2);
-PwmOut led3(LED3);
-PwmOut led4(LED4);
-
-void flashLeds()
-{
-    if (phototransistor.read() < 0.25)
-    {
-        led1 = 1.0f;
-        led2 = 0.0f;
-        led3 = 0.0f;
-        led4 = 0.0f;
-    }
-    else if (phototransistor.read() >= 0.25 && phototransistor.read() < 0.5)
-    {
-        led1 = 1.0f;
-        led2 = 1.0f;
-        led3 = 0.0f;
-        led4 = 0.0f;
-    }  else if (phototransistor.read() >= 0.5 && phototransistor.read() < 0.75)
-    {
-        led1 = 1.0f;
-        led2 = 1.0f;
-        led3 = 1.0f;
-        led4 = 0.0f;
-    }
-        else
-    {
-        led1 = 1.0f;
-        led2 = 1.0f;
-        led3 = 1.0f;
-        led4 = 1.0f;
-    }
-}
-
-*/
 
 // communicated with the pc
 Serial pc(USBTX, USBRX);
 
-// Create the local filesystem under the name "local"
+// Create the local filesystem under the name "local" for writing data to file
 LocalFileSystem local("local");
+
+// Only write to the file once
 bool writtenToFile = false;
 
 // main loop for the program
@@ -81,28 +50,51 @@ int main() {
     if(!writtenToFile) {
         
         // Open "out.txt" on the local file system for writing
-        FILE *fp = fopen("/local/out.txt", "w");
-
-        // attempting to calculate time taken to create a maze:
-        // http://stackoverflow.com/questions/728068/how-to-calculate-a-time-difference-in-c
-        const clock_t begin_time = clock();
-        Maze theMaze;
-        float time = (float) (clock() - begin_time) / CLOCKS_PER_SEC;
-
-        fprintf(fp, "Time taken: %f.\n\n", time);
-
-        for (uint8_t y = 0; y < 16; y++) {
-            fprintf(fp, "Row: %x\t", (int) y);
-            for (uint8_t x = 0; x < 16; x++) {
-                fprintf(fp, "%x ", (int) theMaze.getCell(x, y).getCellData());
-            } // end inner for()
-            fprintf(fp, "\n");
-        } // end outer for()
+        //FILE *fp = fopen("/local/out.txt", "w");
         
-        fclose(fp);
+        Maze maze;
+        
+        Mouse mouse;
+        uint8_t xCoord = mouse.getXLocation();
+        uint8_t yCoord = mouse.getYLocation();
+        
+        for(uint8_t i = 0; i<16 ; i++) {
+            // write a matrix of cells to the file
+            for (uint8_t y = 0; y < 16; y++) {
+                //fprintf(fp, "Row: %x\t", (int) y);
+                pc.printf("Row: %x\t", (int) y);
+                
+                for (uint8_t x = 0; x < 16; x++) {
+                    // convert every cell information to type int so printf may be used.
+                    //fprintf(fp, "%x ", (int) maze.getCell(x, y).getCellData());
+                    if(mouseXCoord == x && mouseYCoord == y) {
+                        pc.printf("M ");
+                    } else {
+                        pc.printf("%x ", (int) maze.getCell(x, y).getCellData());
+                    }
+                    
+                } // end inner for()
+                //fprintf(fp, "\n");
+                pc.printf("\r\n");
+            } // end outer for()
+            
+            
+            
+            pc.printf("\r\n");
+            //fprintf(fp, "Mouse position x=%x, y=%x/n", (int) mouse.getLocation().x, (int) mouse.getLocation().y);
+            
+            
+        
+            mouseXCoord += 1;
+            wait(0.5f);
+            
+        }
+        
+        //fclose(fp); // close file
         writtenToFile = true;
     }
-    
-    wait(1.5f);
-    
+    //while(1){
+    //    wait(0.7f);
+    //    pc.printf("The AnalogIn IR reading is: %.2f\r\n", phototransistor.read());
+    //}
 } // end main

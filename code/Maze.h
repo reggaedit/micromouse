@@ -6,7 +6,8 @@
 
 class Maze {
     public:
-        Maze(); // constructor
+        Maze(); // default constructor
+        Maze(uint8_t); // sample maze constructor
         const Cell& getCell(uint8_t, uint8_t);
         
     private:

@@ -17,6 +17,9 @@ Maze::Maze() {
         mazeGrid[i][mazeWidth-1].setCellWalls(SOUTH_W);
     } // end for loop
     
+    // set the start cell
+    mazeGrid[0][15].setCellWalls(EAST_W);
+    
 } // end constructor
 
 const Cell& Maze::getCell(uint8_t x, uint8_t y) {
