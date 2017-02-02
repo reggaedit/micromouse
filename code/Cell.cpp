@@ -1,5 +1,6 @@
 #include "Cell.h"
 #include <bitset>
+#include <stdint.h>
 
 Cell::Cell() {
     
@@ -42,4 +43,16 @@ void Cell::setCellVisited(bool visited){
 
 bool Cell::getCellVisited(){
     return cellVisited;
+}
+
+// temp methods for the RandomMaze, so it knows which location the cell has.
+void Cell::setCellLocation(uint8_t r, uint8_t c) {
+    row = r;
+    col = c;
+}
+uint8_t Cell::getRow(){
+    return row;
+}
+uint8_t Cell::getColumn() {
+    return col;
 }

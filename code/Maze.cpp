@@ -9,7 +9,7 @@ Maze::Maze() {
 
     const uint8_t mazeWidth = 16;
 
-    // set all the west walls of the cells on the left.
+    // set all the outside walls of the outside cells
     for(uint8_t i = 0; i < mazeWidth; i++) {
         mazeGrid[0][i].setCellWalls(WEST_W);
         mazeGrid[i][0].setCellWalls(NORTH_W);
