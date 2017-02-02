@@ -7,13 +7,10 @@
 class Maze {
     public:
         Maze(); // default constructor
-        Maze(uint8_t); // sample maze constructor
         const Cell& getCell(uint8_t, uint8_t);
         
     private:
         const uint8_t mazeWidth = 16;
         Cell mazeGrid[16][16];
-        
-       //Cell mazeGrid[][];
 };
 #endif

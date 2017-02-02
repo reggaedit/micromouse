@@ -17,11 +17,13 @@ class Cell {
         void unsetCellWalls(CellWalls walls);
         void clearCellWalls();
         void setAllCellWalls();
+        void setCellVisited(bool);
+        bool getCellVisited();
         uint8_t getCellData() const;
         
     private:
         bool cellVisited;
-        //short int cellLocation[2]; // maybe not required if each cell is in a maze array.
-        uint8_t _cellWalls; // where a cell does/doesn't have walls
+        // where a cell does/doesn't have walls (see CellWalls enum)
+        uint8_t _cellWalls;
 };
 #endif

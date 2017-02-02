@@ -35,3 +35,11 @@ void Cell::setAllCellWalls() {
 uint8_t Cell::getCellData() const {
     return _cellWalls;
 }
+
+void Cell::setCellVisited(bool visited){
+    cellVisited = visited;
+}
+
+bool Cell::getCellVisited(){
+    return cellVisited;
+}
