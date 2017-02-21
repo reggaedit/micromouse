@@ -1,18 +1,19 @@
-include "mbed.h"
+#include "Sensor.h"
 #include "motordriver.h"
 #include <map>
 #include <iterator>
 
-/* Stores ADC-distance pairs in a binary tree. Distance in mm */
-std::map<uint16_t,float> distance_map;
+Sensor::Sensor() {
+    initDistances();
+}
 
-uint16_t voltageToDAC(float v)
+uint16_t Sensor::voltageToDAC(float v)
 {
     return 65530 * (v / 3.3);    
 }
 
 /* initDistances: initilise map with distances */
-void initDistances()
+void Sensor::initDistances()
 {
     /* Map between voltages and distance */
     std::map<float, float> voltage_map;
@@ -32,7 +33,7 @@ void initDistances()
 }
 
 /* findDistance: returns the distance given a ADC reading */
-float GetDistance(uint16_t adc)
+float Sensor::getDistance(uint16_t adc)
 {
     /* Find the first element with key value greater than adc) */
     std::map<uint16_t,float>::iterator lower_it = distance_map.lower_bound(adc);
